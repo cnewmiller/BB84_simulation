@@ -1,0 +1,6 @@
+com/ars/quantum/utils/QRegistersTest.class
+com/ars/gates/QuantumGatesTest.class
+com/ars/quantum/utils/QuantumOperationsTest.class
+com/ars/qubits/QRegisterTest.class
+com/ars/quantum/AllTests.class
+com/ars/qubits/QubitTest.class

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QRegister.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">QuantumComputingLib</a> &gt; <a href="index.source.html" class="el_package">com.ars.qubits</a> &gt; <span class="el_source">QRegister.java</span></div><h1>QRegister.java</h1><pre class="source lang-java linenums">package com.ars.qubits;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.ars.quantum.exception.RegisterOverflowException;
+import com.ars.quantum.utils.QRegisterOperations;
+
+
+public class QRegister implements Iterable&lt;Qubit&gt; {
+	private List&lt;Qubit&gt;	qubitRegister;
+	private int			registerSize;
+
+<span class="fc" id="L15">	public QRegister(int size) {</span>
+<span class="fc" id="L16">		this.registerSize = size;</span>
+<span class="fc" id="L17">		qubitRegister = new ArrayList&lt;&gt;(size);</span>
+
+<span class="fc" id="L19">	}</span>
+
+	public QRegister initialize() {
+<span class="fc" id="L22">		qubitRegister = QRegisterOperations.getInstance().fillWith(qubitRegister, QubitZero::new, registerSize);</span>
+<span class="fc" id="L23">		return this;</span>
+	}
+
+	public int size() {
+<span class="fc" id="L27">		return registerSize;</span>
+	}
+
+	public void add(Qubit e) throws RegisterOverflowException {
+<span class="fc bfc" id="L31" title="All 2 branches covered.">		if (qubitRegister.size() &gt;= registerSize) {</span>
+<span class="fc" id="L32">			throw new RegisterOverflowException();</span>
+		}
+<span class="fc" id="L34">		qubitRegister.add(e);</span>
+<span class="fc" id="L35">	}</span>
+
+	public QRegister change(int index, Qubit e) {
+<span class="fc" id="L38">		qubitRegister.set(index, e);</span>
+<span class="fc" id="L39">		return this;</span>
+	}
+
+	public Qubit get(int index) {
+<span class="fc" id="L43">		return qubitRegister.get(index);</span>
+	}
+
+	@Override
+	public Iterator&lt;Qubit&gt; iterator() {
+<span class="fc" id="L48">		return qubitRegister.iterator();</span>
+	}
+
+	public List&lt;Qubit&gt; getQubits() {
+<span class="nc" id="L52">		return qubitRegister;</span>
+	}
+
+	public void setQubits(List&lt;Qubit&gt; qubits) {
+<span class="fc" id="L56">		qubitRegister = qubits;</span>
+<span class="fc" id="L57">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L61">		StringBuffer buffer = new StringBuffer();</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">		for (Qubit q : qubitRegister)</span>
+<span class="nc" id="L63">			buffer.append(q);</span>
+<span class="nc" id="L64">		return buffer.toString();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

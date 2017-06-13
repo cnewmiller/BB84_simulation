@@ -1,0 +1,25 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+QuantumComputingLib,com.ars.qubits,QubitPlus,0,19,0,0,0,2,0,1,0,1
+QuantumComputingLib,com.ars.qubits,QRegister,26,64,2,2,5,17,3,9,2,8
+QuantumComputingLib,com.ars.qubits,QubitMinus,0,19,0,0,0,2,0,1,0,1
+QuantumComputingLib,com.ars.qubits,QubitZero,0,13,0,0,0,2,0,1,0,1
+QuantumComputingLib,com.ars.qubits,QubitOne,0,13,0,0,0,2,0,1,0,1
+QuantumComputingLib,com.ars.qubits,Qubit,18,144,4,12,4,29,4,11,1,6
+QuantumComputingLib,com.ars.gates,GateFactory.new Object() {...},7,47,0,0,0,1,0,1,0,1
+QuantumComputingLib,com.ars.gates,ZGate,0,96,0,6,0,17,0,5,0,2
+QuantumComputingLib,com.ars.gates,IdentityGate,0,5,0,0,0,2,0,2,0,2
+QuantumComputingLib,com.ars.gates,XGate,0,86,0,6,0,18,0,5,0,2
+QuantumComputingLib,com.ars.gates,GatesAbstractFactory,0,3,0,0,0,1,0,1,0,1
+QuantumComputingLib,com.ars.gates,CPhaseShift,81,0,2,0,11,0,3,0,2,0
+QuantumComputingLib,com.ars.gates,GateProducer,3,4,0,0,1,1,1,1,1,1
+QuantumComputingLib,com.ars.gates,HGate,0,101,0,6,0,21,0,5,0,2
+QuantumComputingLib,com.ars.gates,YGate,0,98,0,6,0,18,0,5,0,2
+QuantumComputingLib,com.ars.gates,CNotGate,0,69,0,2,0,12,0,3,0,2
+QuantumComputingLib,com.ars.gates,EGateTypes,5,83,0,0,0,8,1,3,1,3
+QuantumComputingLib,com.ars.gates,GateFactory,5,41,2,6,2,15,2,7,0,2
+QuantumComputingLib,com.ars.algorithms,QuantumAlgorithms,19,0,0,0,8,0,3,0,3,0
+QuantumComputingLib,com.ars.algorithms,MeasurementPerformer,198,0,22,0,40,0,17,0,6,0
+QuantumComputingLib,com.ars.quantum.utils,QRegisterOperations,2,95,1,7,1,22,1,10,0,7
+QuantumComputingLib,com.ars.quantum.utils,QuantumOperations,33,217,4,16,7,43,5,18,2,11
+QuantumComputingLib,com.ars.quantum.exception,IncorrectMatrixSizeException,4,0,0,0,2,0,1,0,1,0
+QuantumComputingLib,com.ars.quantum.exception,RegisterOverflowException,0,4,0,0,0,2,0,1,0,1

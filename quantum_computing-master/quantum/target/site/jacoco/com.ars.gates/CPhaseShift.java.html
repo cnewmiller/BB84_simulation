@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CPhaseShift.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">QuantumComputingLib</a> &gt; <a href="index.source.html" class="el_package">com.ars.gates</a> &gt; <span class="el_source">CPhaseShift.java</span></div><h1>CPhaseShift.java</h1><pre class="source lang-java linenums">package com.ars.gates;
+
+import com.ars.complexnumbers.ComplexMath;
+import com.ars.complexnumbers.ComplexNumber;
+import com.ars.qubits.Qubit;
+
+<span class="nc" id="L7">public final class CPhaseShift implements IGate {</span>
+
+	@Override
+	public Qubit applyGate(Qubit inputQubit, int[] targetPosition,
+			int[] conditions, int noOfEntangledQubits) {
+<span class="nc" id="L12">		int mask = 0;</span>
+<span class="nc" id="L13">		int new_position = 0;</span>
+
+<span class="nc" id="L15">		ComplexNumber[] states = inputQubit.getQubit();</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">		for (int i : conditions) {</span>
+<span class="nc" id="L17">			mask |= (1 &lt;&lt; (noOfEntangledQubits - 1 - i));</span>
+		}
+<span class="nc" id="L19">		mask |= (1 &lt;&lt; (noOfEntangledQubits - targetPosition[0] - 1));</span>
+<span class="nc" id="L20">		new_position = mask | 0x01;</span>
+<span class="nc" id="L21">		states[mask] = ComplexMath.multiply(states[mask], new ComplexNumber(</span>
+				-1.0, 0.0));
+
+<span class="nc" id="L24">		states[new_position] = ComplexMath.multiply(states[new_position],</span>
+				new ComplexNumber(-1.0, 0.0));
+
+<span class="nc" id="L27">		return new Qubit(states);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

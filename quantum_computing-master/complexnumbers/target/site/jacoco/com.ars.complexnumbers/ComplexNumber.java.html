@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ComplexNumber.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">complexnumbers</a> &gt; <a href="index.source.html" class="el_package">com.ars.complexnumbers</a> &gt; <span class="el_source">ComplexNumber.java</span></div><h1>ComplexNumber.java</h1><pre class="source lang-java linenums">package com.ars.complexnumbers;
+/**
+* &lt;h1&gt;ComplexNumber&lt;/h1&gt;
+* ComplexNumber class represents the data type for complex numbers.
+
+* @author  Mihai Seba
+* @version 1.0
+ 
+*/
+public class ComplexNumber {
+
+	/**
+	 * The imaginary, Im(z), part of the &lt;code&gt;ComplexNumber&lt;/code&gt;.
+	 */
+	private double			imaginary;
+	
+	/**
+	 * The real,Re(z), part of the &lt;code&gt;ComplexNumber&lt;/code&gt;.
+	 */
+	private double			real;
+
+	/**
+	 * Constructs a new &lt;code&gt;ComplexNumber&lt;/code&gt; object.
+	 * @param real the real part, Re(z), of the complex number
+	 * @param imaginary the imaginary part, Im(z), of the complex number
+	 */
+<span class="fc" id="L27">	public ComplexNumber(double real, double imaginary) {</span>
+<span class="fc" id="L28">		this.imaginary = imaginary;</span>
+<span class="fc" id="L29">		this.real = real;</span>
+<span class="fc" id="L30">	}</span>
+
+	/**
+	 * Constructs a new &lt;code&gt;ComplexNumber&lt;/code&gt; object with both real and imaginary parts 0.
+	 */
+<span class="fc" id="L35">	public ComplexNumber() {</span>
+<span class="fc" id="L36">		this.imaginary = 0.0;</span>
+<span class="fc" id="L37">		this.real = 0.0;</span>
+<span class="fc" id="L38">	}</span>
+
+
+	/**
+	 * Set the real and the imaginary part of the complex number.
+	 * @param real the real part, Re(z), of the complex number
+	 * @param imaginary the imaginary,Im(z), of the complex number
+	 */
+	public void set(double real, double imaginary) {
+<span class="nc" id="L47">		this.real = real;</span>
+<span class="nc" id="L48">		this.imaginary = imaginary;</span>
+<span class="nc" id="L49">	}</span>
+	
+	/**
+	 * Set the real part of the complex number.
+	 * @param real the real part, Re(z), of the complex number
+	 */
+	public void setReal(double real) {
+<span class="fc" id="L56">		this.real = real;</span>
+<span class="fc" id="L57">	}</span>
+
+	/**
+	 * Return the real part of the complex number.
+	 * @return Re(z), the real part of the complex number
+	 */
+	public double getReal() {
+<span class="fc" id="L64">		return real;</span>
+	}
+
+	/**
+	 * Return the imaginary part of the complex number.
+	 * @return Im(z), the imaginary part of the complex number
+	 */
+	public double getImaginary() {
+<span class="fc" id="L72">		return imaginary;</span>
+	}
+
+	/**
+	 * Set the imaginary part of the complex number.
+	 * @param imaginary the imaginary part, Im(z), of the complex number
+	 */
+	public void setImaginary(double imaginary) {
+<span class="fc" id="L80">		this.imaginary = imaginary;</span>
+<span class="fc" id="L81">	}</span>
+
+	/**
+	 * Check if passed &lt;code&gt;ComplexNumber&lt;/code&gt; is equal to the current.
+	 * @param o the complex number to be checked
+	 * @return true if the two complex numbers are equals, otherwise false
+	 */
+	@Override
+	public boolean equals(Object o) {
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">		if (o instanceof ComplexNumber) {</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">			return (Double.compare(((ComplexNumber) o).real, real) == 0</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">					&amp;&amp; Double.compare(((ComplexNumber) o).imaginary, imaginary) == 0);</span>
+		}
+<span class="nc" id="L94">		return false;</span>
+	}
+
+	/**
+	 * Return a string representation of the complex number.
+	 * @return string the representation of the complex number
+	 */
+	@Override
+	public String toString() {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">		return (this.imaginary &lt; 0 ? (String.format(&quot;%f%fi&quot;, real, imaginary))</span>
+<span class="nc" id="L104">				: (String.format(&quot;%f+%fi&quot;, real, imaginary)));</span>
+	}
+
+	/**
+	 * Calculates the argument of the current complex number.
+	 * @return arg(z) the argument of the complex number.
+	 */
+	public double getArg() {
+<span class="fc" id="L112">		return Math.atan2(this.imaginary, this.real);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

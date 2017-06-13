@@ -1,0 +1,11 @@
+complexnumbers/.classpath
+complexnumbers/.project
+complexnumbers/.settings/org.eclipse.jdt.core.prefs
+complexnumbers/target/.gitignore
+quantum/.classpath
+quantum/.project
+quantum/target/.gitignore
+quantumapp/.classpath
+quantumapp/.project
+quantumapp/target/.gitignore
+quantumapp/target/classes/.gitignore

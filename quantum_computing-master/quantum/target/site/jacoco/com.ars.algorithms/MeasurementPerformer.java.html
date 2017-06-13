@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MeasurementPerformer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">QuantumComputingLib</a> &gt; <a href="index.source.html" class="el_package">com.ars.algorithms</a> &gt; <span class="el_source">MeasurementPerformer.java</span></div><h1>MeasurementPerformer.java</h1><pre class="source lang-java linenums">package com.ars.algorithms;
+
+import java.util.Random;
+
+import com.ars.complexnumbers.ComplexMath;
+import com.ars.complexnumbers.ComplexNumber;
+import com.ars.qubits.Qubit;
+
+<span class="nc bnc" id="L9" title="All 2 branches missed.">public class MeasurementPerformer {</span>
+<span class="nc" id="L10">	private Qubit resultQubit = null;</span>
+	private int length;
+	private static final double Q_TOLERANCE = 0.1e-5;
+
+<span class="nc" id="L14">	public MeasurementPerformer() {</span>
+
+<span class="nc" id="L16">	}</span>
+
+	public MeasurementPerformer configure(Qubit resultQubit) {
+<span class="nc" id="L19">		this.resultQubit = resultQubit;</span>
+<span class="nc" id="L20">		return this;</span>
+	}
+
+	public Qubit measure() {
+		// collapse state;
+<span class="nc" id="L25">		int position = fakeMeasure();</span>
+<span class="nc" id="L26">		collapseState(position);</span>
+<span class="nc" id="L27">		return resultQubit;</span>
+	}
+
+	private void collapseState(int position) {
+<span class="nc" id="L31">		ComplexNumber[] collapsedQubit = resultQubit.getQubit();</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">		for (int i = 0; i &lt; collapsedQubit.length; i++) {</span>
+<span class="nc" id="L33">			collapsedQubit[i] = new ComplexNumber(0.0, 0.0);</span>
+		}
+<span class="nc" id="L35">		collapsedQubit[position] = new ComplexNumber(1.0, 0.0);</span>
+<span class="nc" id="L36">		resultQubit = new Qubit(collapsedQubit);</span>
+<span class="nc" id="L37">	}</span>
+
+	private int fakeMeasure() {
+<span class="nc" id="L40">		length = resultQubit.getQubit().length;</span>
+<span class="nc" id="L41">		double[] probabilities = new double[length];</span>
+<span class="nc" id="L42">		double value = 0.0;</span>
+<span class="nc" id="L43">		double total = 0.0;// total probability</span>
+		double choice;
+<span class="nc" id="L45">		int position = 0;</span>
+<span class="nc" id="L46">		int idx = 0;</span>
+<span class="nc" id="L47">		int lastPositionWithNonZeroValue = 0;</span>
+		// fill probabilities array and calculate total probability
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		for (ComplexNumber c : resultQubit.getQubit()) {</span>
+<span class="nc" id="L50">			value = ComplexMath.multiply(c, ComplexMath.conjugate(c)).getReal();</span>
+<span class="nc" id="L51">			total += value;</span>
+<span class="nc" id="L52">			probabilities[position++] = value;</span>
+		}
+<span class="nc bnc" id="L54" title="All 4 branches missed.">		assert (Math.abs(total - 1.0) &lt; Q_TOLERANCE);</span>
+		// normalize probabilities array
+<span class="nc bnc" id="L56" title="All 2 branches missed.">		for (position = 0; position &lt; length; position++) {</span>
+<span class="nc" id="L57">			probabilities[position] /= total;</span>
+		}
+		// use random value to measure state
+<span class="nc" id="L60">		choice = new Random(System.currentTimeMillis()).nextDouble();</span>
+
+<span class="nc bnc" id="L62" title="All 2 branches missed.">		for (idx = 0, position = 0; idx &lt; length; ++idx, ++position) {</span>
+<span class="nc" id="L63">			value = probabilities[idx];</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">			if (Double.compare(value, 0.0) != 0) {</span>
+<span class="nc" id="L65">				lastPositionWithNonZeroValue = idx;</span>
+			}
+<span class="nc bnc" id="L67" title="All 4 branches missed.">			if (Double.compare((choice - value), 0.0) == 0 || Double.compare((choice - value), 0.0) &lt; 0) {</span>
+<span class="nc" id="L68">				return position;// proper entry, just return it</span>
+			}
+<span class="nc" id="L70">			choice -= value;// update and continue</span>
+		}
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		if (Math.abs(choice) &lt; Q_TOLERANCE) {</span>
+<span class="nc" id="L73">			return lastPositionWithNonZeroValue;</span>
+		}
+<span class="nc" id="L75">		return 0;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

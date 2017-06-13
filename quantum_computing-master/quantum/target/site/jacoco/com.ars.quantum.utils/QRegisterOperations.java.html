@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QRegisterOperations.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">QuantumComputingLib</a> &gt; <a href="index.source.html" class="el_package">com.ars.quantum.utils</a> &gt; <span class="el_source">QRegisterOperations.java</span></div><h1>QRegisterOperations.java</h1><pre class="source lang-java linenums">package com.ars.quantum.utils;
+
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import com.ars.quantum.exception.RegisterOverflowException;
+import com.ars.qubits.QRegister;
+import com.ars.qubits.Qubit;
+import com.ars.qubits.QubitOne;
+import com.ars.qubits.QubitZero;
+
+public class QRegisterOperations {
+<span class="fc" id="L15">	private static final QRegisterOperations INSTANCE = new QRegisterOperations();</span>
+
+<span class="fc" id="L17">	private QRegisterOperations() {</span>
+<span class="fc" id="L18">	}</span>
+
+	public static QRegisterOperations getInstance() {
+<span class="fc" id="L21">		return INSTANCE;</span>
+	}
+
+	public List&lt;Qubit&gt; fillWith(List&lt;Qubit&gt; list,
+			Supplier&lt;Qubit&gt; qubitSupplier, int size) {
+<span class="fc" id="L26">		list = Stream.generate(qubitSupplier).limit(size)</span>
+<span class="fc" id="L27">				.collect(Collectors.toList());</span>
+<span class="fc" id="L28">		return list;</span>
+	}
+
+	public QRegister fillWith(QRegister reg, Supplier&lt;Qubit&gt; qubitSupplier) {
+<span class="fc" id="L32">		reg.setQubits(Stream.generate(qubitSupplier).limit(reg.size())</span>
+<span class="fc" id="L33">				.collect(Collectors.toList()));</span>
+<span class="fc" id="L34">		return reg;</span>
+	}
+
+	public QRegister fillWithPattern(String pattern)
+			throws RegisterOverflowException {
+<span class="fc" id="L39">		QRegister qreg = new QRegister(pattern.length()).initialize();</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		for (int i = 0; i &lt; pattern.length(); i++) {</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">			if (pattern.charAt(i) == '1') {</span>
+<span class="fc" id="L42">				qreg.change(i, new QubitOne());</span>
+			} else {
+<span class="fc" id="L44">				qreg.change(i, new QubitZero());</span>
+			}
+		}
+<span class="fc" id="L47">		return qreg;</span>
+	}
+
+	/**
+	 * Perform the tensor product between two or more qubits. Example, for three
+	 * qubits |0&gt;, |0&gt; and |1&gt;, the result will be |001&gt;.
+	 * 
+	 * @param quantumRegister
+	 * @return qubit the tensor product of the two qubits.
+	 */
+	public Qubit entangle(QRegister quantumRegister) {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">		if (quantumRegister.size() &lt; 2) {</span>
+<span class="nc" id="L59">			return null;</span>
+		}
+<span class="fc" id="L61">		Qubit bufferQubit = quantumRegister.get(0);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">		for (int i = 1; i &lt; quantumRegister.size(); i++) {</span>
+<span class="fc" id="L63">			bufferQubit = QuantumOperations.entangle(bufferQubit,</span>
+<span class="fc" id="L64">					quantumRegister.get(i));</span>
+
+		}
+<span class="fc" id="L67">		return bufferQubit;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
